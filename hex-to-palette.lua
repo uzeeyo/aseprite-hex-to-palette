@@ -1,6 +1,6 @@
 function extractClipboardColor()
 	local dlg = Dialog()
-	-- dlg:entry{ id="palette_name", label="Palette name:", text="Name" }
+	dlg:entry{ id="palette_name", label="Palette name:", text="Name" }
 	dlg:entry{ id="user_value", label="Hex values:", text="Colors" }
 	dlg:button{ id="confirm", text="Confirm"}
 	dlg:button{ id="cancel", text="Cancel" }
@@ -44,12 +44,10 @@ function addToPalette(name, colors)
 	for index, color in ipairs(colors) do
 		local rgbColor = hexToColor(color) 
 		palette:setColor(index-1, rgbColor)
-
-		app.command.AddColor{ color=rgbColor }
 	end
 
-	-- name = "data/palettes/" .. name .. ".gpl"
-	-- palette:saveAs(name)
+	name = "data/palettes/" .. name .. ".gpl"
+	palette:saveAs(name)
 end
 
 function hexToColor(hex)
@@ -63,7 +61,6 @@ function hexToColor(hex)
 end
 
 app.transaction(
-	"Start",
 	extractClipboardColor()
 )
 
